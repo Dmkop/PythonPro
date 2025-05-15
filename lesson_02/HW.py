@@ -54,7 +54,7 @@ def show_individual_student(student_id: int):
         
         
 
-def add_student(name: str, marks: list[int], info: str | None):
+def add_student(name: str, info: str | None, marks = []):
     new_id = None
     if len(students) == 0:
         new_id = 1
@@ -64,7 +64,7 @@ def add_student(name: str, marks: list[int], info: str | None):
         "id": new_id,
         "name": name,
         "marks": marks,
-        "info": info
+        "info": info if info else ""
     }
     students.append(student)
     print(f"Student {name} was added successfully with ID {new_id}")
@@ -85,20 +85,21 @@ def main():
 
         if command == "exit":
                 print("\nThanks for using the Journal application")
+                break
         elif command == "help":
                 help()
         elif command == "show":
             show_students()
         elif command == "search":
             try:
-                student_id = int(input("Enter stident ID: "))
+                student_id = int(input("Enter student ID: "))
                 show_individual_student(student_id)
             except ValueError:
                 print("Invalid ID\n")
         elif command == "add":
             name = str(input("Enter student name: "))
             details = str(input("Enter additional info: "))
-            add_student(name, [], details)
+            add_student(name, details)
         else:
             print("Unknown command. Type 'help' to see available commands.")
 
